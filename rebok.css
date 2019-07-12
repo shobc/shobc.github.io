@@ -1,0 +1,28 @@
+h1{
+font-size: 40px;
+text-align: center;
+}
+.book{
+    display: table;
+    width: 100%;
+    background: #FFF;
+}
+.book__item {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+.book__item + .nav__item {
+    border-left: 1px solid #CCC;
+}
+.book__item a {
+    display: block;
+    padding: 15px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+bok img{
+width: 50;
+height: 70;
+}
