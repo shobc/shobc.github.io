@@ -152,8 +152,8 @@ class Fighter extends SpriteActor {
         this._velocityX = xxx;
         this._velocityY = yyy;
 
-        this.x = xxx+110;
-        this.y = yyy+110;
+        this.x = xxx;
+        this.y = yyy;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
@@ -421,7 +421,7 @@ assets.addImage('sprite', 'sprite.png');
 assets.addImage('uchu', 'ダウンロード.jpg');
 assets.loadAll().then((a) => {
     const game = new DanamkuStgGame();
-    var kon = document.body.childNodes[1];
+    var kon = document.body;
     kon.appendChild(game.screenCanvas);
     game.start();
 });
