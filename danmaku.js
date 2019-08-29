@@ -134,37 +134,15 @@ class Fighter extends SpriteActor {
         // キーを押されたら移動する
         this._velocityX = 0;
         this._velocityY = 0;
-        
-       	if(input.getKey('Shift')){
-        	if(input.getKey('ArrowRight')) { this._velocityX = this._speedS; }
-        }else{
-        	if(input.getKey('ArrowRight')) { this._velocityX = this._speed; }
-        }
-        if(input.getKey('Shift')){
-        	if(input.getKey('ArrowLeft')) { this._velocityX = -this._speedS; }
-        }else{
-        	if(input.getKey('ArrowLeft')) { this._velocityX = -this._speed; }
-        }
-        if(input.getKey('Shift')){
-        	if(input.getKey('ArrowUp')) { this._velocityY = -this._speedS; }
-        }else{
-        	if(input.getKey('ArrowUp')) { this._velocityY = -this._speed; }
-        }
-        if(input.getKey('Shift')){
-        	if(input.getKey('ArrowDown')) { this._velocityY = this._speedS; }
-        }else{
-        	if(input.getKey('ArrowDown')) { this._velocityY = this._speed; }
-        }
-      
-       this._timeCountS++;
-        if(this._timeCountS > this._intervalS) {
-            //this.shootBulletA(6);		//引数１は弾幕の密度、引数２は弾速
-            //this.shootBulletB(6);
-            this._timeCountS = 0;
-        } 
-      
-        this.x += this._velocityX;
-        this.y += this._velocityY;
+
+        document.body.addEventListener( "touchstart", function( event ) {
+        var touchObject = event.changedTouches[0] ;
+        var this._velocityX = touchObject.pageX ;
+        var this._velocityY = touchObject.pageY ;
+        } ) ;
+
+        this.x = this._velocityX;
+        this.y = this._velocityY;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
@@ -180,15 +158,13 @@ class Fighter extends SpriteActor {
         this._timeCount++;
         const isFireReady = this._timeCount > this._interval;
         if(isFireReady) {
-        	if(input.getKey(' ')||input.getKey('z')||input.getKey('Z')){
-            	const bullet = new Bullet(this.x, this.y,0);
-            	this.spawnActor(bullet);
-            	const bullet2 = new Bullet(this.x, this.y,3);
-            	this.spawnActor(bullet2);
-            	const bullet3 = new Bullet(this.x, this.y,-3);
-            	this.spawnActor(bullet3);
-            	this._timeCount = 0;
-            }
+        	const bullet = new Bullet(this.x, this.y,0);
+        	this.spawnActor(bullet);
+        	const bullet2 = new Bullet(this.x, this.y,3);
+        	this.spawnActor(bullet2);
+        	const bullet3 = new Bullet(this.x, this.y,-3);
+        	this.spawnActor(bullet3);
+        	this._timeCount = 0;
         }
     }
 }
@@ -407,7 +383,7 @@ class DanmakuStgTitleScene extends Scene {
 
     update(gameInfo, input) {
         super.update(gameInfo, input);
-        if(input.getKeyDown(' ')) {
+        if(document.body.addEventListener( "touchstart", function( event )) {
             const mainScene = new DanmakuStgMainScene(this.renderingTarget);
             this.changeScene(mainScene);
             startTime = Date.now();
