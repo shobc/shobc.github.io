@@ -1,5 +1,5 @@
 'use strict';
-   var timer = document.getElementById('timer');
+   // var timer = document.getElementById('timer');
     var start = document.getElementById('start');
 
     //クリック時の時間を保持するための変数定義
@@ -48,7 +48,7 @@ function updateTimetText(){
         ms = ('0' + ms).slice(-3);
 
         //HTMLのid　timer部分に表示させる　
-        timer.textContent = m + ':' + s + ':' + ms;
+        // timer.textContent = m + ':' + s + ':' + ms;
 }
 
 function countUp(){
