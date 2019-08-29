@@ -10,6 +10,23 @@
  //タイマーを止めるにはclearTimeoutを使う必要があり、そのためにはclearTimeoutの引数に渡すためのタイマーのidが必要
     var timerId;
 
+    var xxx;
+
+    var yyy;
+
+    var aaa = 0;
+
+document.body.addEventListener( "touchstart", function( event ) {
+    var touchObject = event.changedTouches[0] ;
+    
+    xxx = touchObject.pageX ;
+
+    aaa = 1;
+
+    yyy = touchObject.pageY ;
+} ) ;
+
+
 
 function updateTimetText(){
 
@@ -135,14 +152,8 @@ class Fighter extends SpriteActor {
         this._velocityX = 0;
         this._velocityY = 0;
 
-        document.body.addEventListener( "touchstart", function( event ) {
-        var touchObject = event.changedTouches[0] ;
-        var this._velocityX = touchObject.pageX ;
-        var this._velocityY = touchObject.pageY ;
-        } ) ;
-
-        this.x = this._velocityX;
-        this.y = this._velocityY;
+        this.x = xxx;
+        this.y = yyy;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
@@ -158,16 +169,20 @@ class Fighter extends SpriteActor {
         this._timeCount++;
         const isFireReady = this._timeCount > this._interval;
         if(isFireReady) {
-        	const bullet = new Bullet(this.x, this.y,0);
-        	this.spawnActor(bullet);
-        	const bullet2 = new Bullet(this.x, this.y,3);
-        	this.spawnActor(bullet2);
-        	const bullet3 = new Bullet(this.x, this.y,-3);
-        	this.spawnActor(bullet3);
-        	this._timeCount = 0;
+        	if(input.getKey(' ')||input.getKey('z')||input.getKey('Z')){
+            	const bullet = new Bullet(this.x, this.y,0);
+            	this.spawnActor(bullet);
+            	const bullet2 = new Bullet(this.x, this.y,3);
+            	this.spawnActor(bullet2);
+            	const bullet3 = new Bullet(this.x, this.y,-3);
+            	this.spawnActor(bullet3);
+            	this._timeCount = 0;
+            }
         }
     }
 }
+
+
 
 class EnemyBullet extends SpriteActor {
     constructor(x, y, velocityX, velocityY) {
@@ -341,11 +356,11 @@ class DanmakuStgGameOverScene extends Scene {
 class DanmakuStgMainScene extends Scene {
     constructor(renderingTarget) {
         super('メイン', 'red', renderingTarget);
-        const backg = new BackG(0,0);
+        // const backg = new BackG(0,0);
         const fighter = new Fighter(150, 300);
         const enemy = new Enemy(150, 100);
         const hpBar = new EnemyHpBar(50, 20, enemy);
-        this.add(backg);
+        // this.add(backg);
         this.add(fighter);
         this.add(enemy);
         this.add(hpBar);
@@ -383,7 +398,7 @@ class DanmakuStgTitleScene extends Scene {
 
     update(gameInfo, input) {
         super.update(gameInfo, input);
-        if(document.body.addEventListener( "touchstart", function( event )) {
+        if(aaa==1) {
             const mainScene = new DanmakuStgMainScene(this.renderingTarget);
             this.changeScene(mainScene);
             startTime = Date.now();
