@@ -149,11 +149,11 @@ class Fighter extends SpriteActor {
     
     update(gameInfo, input) {
         // キーを押されたら移動する
-        this._velocityX = 0;
-        this._velocityY = 0;
+        this._velocityX = xxx;
+        this._velocityY = yyy;
 
-        this.x = xxx;
-        this.y = yyy;
+        this.x = this._velocityX;
+        this.y = this._velocityX;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
