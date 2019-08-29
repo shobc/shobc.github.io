@@ -29,7 +29,13 @@ document.body.ontouchmove= function( event ){
     yyy = touchObject.pageY ;
 };
 
+var scrollOff = function( e ){
+    e.preventDefault();
+}
 
+document.addEventListener('touchmove',scrollOff,false);
+
+document.removeEventListener('touchmove',scrollOff,false);
 
 function updateTimetText(){
 
