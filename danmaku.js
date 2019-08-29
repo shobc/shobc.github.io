@@ -124,7 +124,7 @@ class Fighter extends SpriteActor {
         // 敵の弾に当たったらdestroyする
         this.addEventListener('hit', (e) => {
            if(e.target.hasTag('enemyBullet')) {
-               this.destroy();
+               // this.destroy();
            } 
         });
     }
@@ -152,18 +152,18 @@ class Fighter extends SpriteActor {
         this._velocityX = xxx;
         this._velocityY = yyy;
 
-        this.x = this._velocityX;
-        this.y = this._velocityY;
+        this.x = xxx+110;
+        this.y = yyy+110;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
         const boundHeight = gameInfo.screenRectangle.height - this.height;
         const bound = new Rectangle(this.width, this.height, boundWidth, boundHeight);
         
-        if(this.isOutOfBounds(bound)) {
-            this.x -= this._velocityX;
-            this.y -= this._velocityY;
-        }
+        // if(this.isOutOfBounds(bound)) {
+        //     this.x -= this._velocityX;
+        //     this.y -= this._velocityY;
+        // }
 
         // スペースキーで弾を打つ
         this._timeCount++;
