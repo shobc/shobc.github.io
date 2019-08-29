@@ -17,6 +17,9 @@
     var aaa = 0;
 
 document.body.addEventListener( "touchstart", function( event ) {
+    aaa = 1;
+} ) ;
+document.body.addEventListener( "ontouchmove", function( event ) {
     var touchObject = event.changedTouches[0] ;
     
     xxx = touchObject.pageX ;
