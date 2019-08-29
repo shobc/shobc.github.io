@@ -169,7 +169,7 @@ class Fighter extends SpriteActor {
         this._timeCount++;
         const isFireReady = this._timeCount > this._interval;
         if(isFireReady) {
-        	if(input.getKey(' ')||input.getKey('z')||input.getKey('Z')){
+        	// if(input.getKey(' ')||input.getKey('z')||input.getKey('Z')){
             	const bullet = new Bullet(this.x, this.y,0);
             	this.spawnActor(bullet);
             	const bullet2 = new Bullet(this.x, this.y,3);
@@ -177,7 +177,7 @@ class Fighter extends SpriteActor {
             	const bullet3 = new Bullet(this.x, this.y,-3);
             	this.spawnActor(bullet3);
             	this._timeCount = 0;
-            }
+            // }
         }
     }
 }
