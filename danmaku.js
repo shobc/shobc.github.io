@@ -19,7 +19,7 @@
 document.body.addEventListener( "touchstart", function( event ) {
     aaa = 1;
 } ) ;
-document.body.addEventListener( "touchmove", function( event ) {
+document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
     xxx = touchObject.pageX ;
@@ -27,7 +27,7 @@ document.body.addEventListener( "touchmove", function( event ) {
     aaa = 1;
 
     yyy = touchObject.pageY ;
-} ) ;
+};
 
 
 
