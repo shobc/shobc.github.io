@@ -152,8 +152,8 @@ class Fighter extends SpriteActor {
         this._velocityX = xxx;
         this._velocityY = yyy;
 
-        this.x = this._velocityX;
-        this.y = this._velocityX;
+        this.x = this._velocityX+100;
+        this.y = this._velocityY+100;
 
         // 画面外に行ってしまったら押し戻す
         const boundWidth = gameInfo.screenRectangle.width - this.width;
