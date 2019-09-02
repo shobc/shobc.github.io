@@ -365,7 +365,7 @@ class DanmakuStgGameOverScene extends Scene {
 
 class DanmakuStgMainScene extends Scene {
     constructor(renderingTarget) {
-        super('メイン', 'black', renderingTarget);
+        super('メイン', 'black ', renderingTarget);
         // const backg = new BackG(0,0);
         const fighter = new Fighter(150, 300);
         const enemy = new Enemy(150, 100);
