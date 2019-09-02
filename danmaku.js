@@ -31,11 +31,11 @@ document.body.ontouchstart= function( event ){
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
-    xxx = touchObject.pageX/3.2 ;
+    // xxx = touchObject.pageX/3.2 ;
 
-    aaa = 1;
+    // aaa = 1;
 
-    yyy = touchObject.pageY/3.2  ;
+    // yyy = touchObject.pageY/3.2  ;
 };
 
 function updateTimetText(){
