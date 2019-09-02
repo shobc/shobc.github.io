@@ -30,7 +30,7 @@ document.body.ontouchmove= function( event ){
 
     aaa = 1;
 
-    yyy = touchObject.pageY/3-20 ;
+    yyy = touchObject.pageY/3-100 ;
 };
 
 var scrollOff = function( e ){
