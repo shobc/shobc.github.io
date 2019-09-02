@@ -19,6 +19,15 @@
 document.body.addEventListener( "touchstart", function( event ) {
     aaa = 1;
 } ) ;
+document.body.ontouchstart= function( event ){
+    var touchObject = event.changedTouches[0] ;
+    
+    xxx = touchObject.pageX/3 ;
+
+    aaa = 1;
+
+    yyy = touchObject.pageY/3-30 ;
+};
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
