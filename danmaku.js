@@ -134,7 +134,7 @@ class Fighter extends SpriteActor {
         // 敵の弾に当たったらdestroyする
         this.addEventListener('hit', (e) => {
            if(e.target.hasTag('enemyBullet')) {
-               // this.destroy();
+               this.destroy();
            } 
         });
     }
@@ -243,7 +243,7 @@ class Enemy extends SpriteActor {
         const hitArea = new Rectangle(0, 0, 16, 16);
         super(x, y, sprite, hitArea, ['enemy']);
 
-        this.maxHp = 300;		//敵の最大HP
+        this.maxHp = 100;		//敵の最大HP
         this.currentHp = this.maxHp;
 
         this._interval = 30;		//弾幕の発射間隔(初期値は30)
@@ -365,7 +365,7 @@ class DanmakuStgGameOverScene extends Scene {
 
 class DanmakuStgMainScene extends Scene {
     constructor(renderingTarget) {
-        super('メイン', 'red', renderingTarget);
+        super('メイン', 'black', renderingTarget);
         // const backg = new BackG(0,0);
         const fighter = new Fighter(150, 300);
         const enemy = new Enemy(150, 100);
