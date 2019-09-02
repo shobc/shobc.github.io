@@ -22,11 +22,11 @@ document.body.addEventListener( "touchstart", function( event ) {
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
-    xxx = touchObject.pageX/2.5 ;
+    xxx = touchObject.pageX/4 ;
 
     aaa = 1;
 
-    yyy = touchObject.pageY/2.5 ;
+    yyy = touchObject.pageY/4 ;
 };
 
 var scrollOff = function( e ){
@@ -242,7 +242,7 @@ class Enemy extends SpriteActor {
         const hitArea = new Rectangle(0, 0, 16, 16);
         super(x, y, sprite, hitArea, ['enemy']);
 
-        this.maxHp = 10;		//敵の最大HP
+        this.maxHp = 300;		//敵の最大HP
         this.currentHp = this.maxHp;
 
         this._interval = 30;		//弾幕の発射間隔(初期値は30)
