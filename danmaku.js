@@ -22,11 +22,11 @@ document.body.addEventListener( "touchstart", function( event ) {
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
-    xxx = touchObject.pageX ;
+    xxx = touchObject.pageX*2.5 ;
 
     aaa = 1;
 
-    yyy = touchObject.pageY ;
+    yyy = touchObject.pageY*2.5 ;
 };
 
 var scrollOff = function( e ){
