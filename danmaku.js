@@ -22,20 +22,20 @@ document.body.addEventListener( "touchstart", function( event ) {
 document.body.ontouchstart= function( event ){
     var touchObject = event.changedTouches[0] ;
     
-    xxx = touchObject.pageX/3.15 ;
+    xxx = touchObject.pageX/3.2 ;
 
     aaa = 1;
 
-    yyy = touchObject.pageY/4 ;
+    yyy = touchObject.pageY/3.2 ;
 };
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
     
-    xxx = touchObject.pageX/3.15 ;
+    xxx = touchObject.pageX/3.2 ;
 
     aaa = 1;
 
-    yyy = touchObject.pageY/4 ;
+    yyy = touchObject.pageY/3.2  ;
 };
 
 function updateTimetText(){
