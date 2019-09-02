@@ -33,14 +33,6 @@ document.body.ontouchmove= function( event ){
     yyy = touchObject.pageY/3-30 ;
 };
 
-var scrollOff = function( e ){
-    e.preventDefault();
-}
-
-document.addEventListener('touchmove',scrollOff,false);
-
-document.removeEventListener('touchmove',scrollOff,false);
-
 function updateTimetText(){
 
         //m(分) = 135200 / 60000ミリ秒で割った数の商　-> 2分
