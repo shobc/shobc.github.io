@@ -423,6 +423,7 @@ class DanmakuStgGameOverScene extends Scene {
         super('ゲームオーバー', 'black', renderingTarget);
         const text = new TextLabel(160, 400, '満身創痍');
         this.add(text);
+        alert("ゲームオーバー…");
         setTimeout("location.reload()",2000);		//2秒後にタイトルに戻る(2000ms)
     }
     update(gameInfo, input) {		//すべての処理を司るメソッド
