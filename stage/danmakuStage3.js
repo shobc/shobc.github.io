@@ -422,7 +422,7 @@ class DanmakuStgEndScene extends Scene {
         super('クリア', 'black', renderingTarget);
         const text = new TextLabel(125, 400, 'ゲームクリア！');
         this.add(text);
-        location.href = 'Stage4.html?fighterZanki='+encodeURIComponent(zanki);
+        location.href = 'select.html';
 
     }update(gameInfo, input) {		//すべての処理を司るメソッド
         this._updateAll(gameInfo, input);

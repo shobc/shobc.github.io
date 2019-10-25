@@ -150,8 +150,7 @@ class Fighter extends SpriteActor {
         this._speedS = 2;     //低速移動時のスピード
         this._velocityX = 0;		//X方向のスピード。上書きされるので意味ないかも？
         this._velocityY = 0;		//Y(ry
-        this.myzanki = zanki;
-        this.myzanki = zanki;
+        this.myzanki = 5;
         this.bombval = 5;
 
         // 敵の弾に当たったらdestroyする
@@ -460,7 +459,7 @@ class DanmakuStgEndScene extends Scene {
         super('クリア', 'black', renderingTarget);
         const text = new TextLabel(125, 400, 'ゲームクリア！');
         this.add(text);
-      window.location.href = 'Stage1.html';
+      window.location.href = 'select.html';
 
     }update(gameInfo, input) {		//すべての処理を司るメソッド
         this._updateAll(gameInfo, input);
