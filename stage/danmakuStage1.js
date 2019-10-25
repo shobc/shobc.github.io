@@ -108,7 +108,7 @@ class TextLabel extends Actor {
 
 class Bullet extends SpriteActor {
     constructor(x, y, velocityX) {
-        const sprite = new Sprite(assets.get('sprite'), new Rectangle(0, 32, 32, 32));
+        const sprite = new Sprite(assets.get('mark'), new Rectangle(0, 32, 32, 32));
         const hitArea = new Rectangle(8, 0, 16, 32);
         super(x, y, sprite, hitArea, ['playerBullet']);
 
