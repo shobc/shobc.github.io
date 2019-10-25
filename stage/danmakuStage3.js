@@ -480,7 +480,6 @@ class DanmakuStgMainScene extends Scene {
         	ms = ('0' + ms).slice(-3);
 			localStorage.setItem("new", elapsedTime);
                alert('ステージ3クリア！');
-               alert('残り残機'+zanki);
             const scene = new DanmakuStgEndScene(this.renderingTarget);
             this.changeScene(scene);
         });
