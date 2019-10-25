@@ -28,28 +28,27 @@
 
     var aaa = 0;
 
-document.body.addEventListener( "touchstart", function( event ) {
+document.addEventListener( "touchstart", function( event ) {
     aaa = 1;
 } ) ;
-document.ontouchstart= function( event ){
+document.body.ontouchstart= function( event ){
     var touchObject = event.changedTouches[0] ;
 
-    xxx = touchObject.pageX/1.9;
+    xxx = touchObject.clientX/1.9;
 
     aaa = 1;
 
-    yyy = touchObject.pageY/1.9;
+    yyy = touchObject.clientY/1.9;
 };
 document.body.ontouchmove= function( event ){
     var touchObject = event.changedTouches[0] ;
 
-    xxx = touchObject.pageX/1.9;
+    xxx = touchObject.clientX/1.9;
 
     aaa = 1;
 
-    yyy = touchObject.pageY/1.9 ;
+    yyy = touchObject.clientY/1.9 ;
 };
-
 
 
 function updateTimetText(){
@@ -479,7 +478,7 @@ class DanmakuStgTitleScene extends Scene {
     constructor(renderingTarget) {
         super('タイトル', 'black', renderingTarget);
         const title = new TextLabel(160, 400, '弾幕STG');
-        const title1 = new TextLabel(10, 600, 'スペースでゲームスタート');
+        const title1 = new TextLabel(10, 600, 'タップでゲームスタート');
         this.add(title);
         this.add(title1)
     }
