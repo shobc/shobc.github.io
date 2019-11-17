@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>sample</title>
+    <script src="instascan.min.js" type="text/javascript"></script>
+</head>
+<body>
+<video id="video"></video>
+<script>
+    let scanner = new Instascan.Scanner({ video: document.getElementById('video') }); // 映像の出力先を指定
+    scanner.addListener('scan', function (content) {
+        alert(content); // 読み込み後の処理
+    });
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            scanner.start(cameras[0]); // 0番目のカメラを指定
+        } else {
+            alert('カメラが見つかりませんでした');
+        }
+    }).catch(function (e) {
+        console.error(e);
+        alert('カメラの起動に失敗しました');
+    });
+</script>
+</body>
+</html>
