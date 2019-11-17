@@ -1,34 +1,179 @@
-<html>
+<!doctype html>
+<html lang="ja">
+
 <head>
-    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, intial-scale=1, mininum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
+
 <body>
-<input type=text size=16 placeholder="Tracking Code" class=qrcode-text><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label>
-<input type=button value="Go" disabled>
-<style>
-    body, input {font-size:14pt}
-    input, label {vertical-align:middle}
-    .qrcode-text {padding-right:1.7em; margin-right:0}
-    .qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
-    .qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
-</style>
-<script>
-    function openQRCamera(node) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            node.value = "";
-            qrcode.callback = function(res) {
-                if(res instanceof Error) {
-                    alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
-                } else {
-                    node.parentNode.previousElementSibling.value = res;
+<h1>QRコード読み取りデモ2</h1>
+<div style="text-align: center;">
+    <video id="video" style="width: 80%; height: auto;" autoplay playsinline></video>
+</div>
+<img id="img" />
+<div style="display: none;">
+    <canvas id="canvas"></canvas>
+</div>
+<div>
+    <input type="text" id="qr" value="">
+</div>
+<div>
+    <button type="button" id="changeCamera">カメラ切り替え</button>
+</div>
+<div>
+    <h2>アクティブなカメラ</h2>
+    <p id="active-camera"></p>
+</div>
+</body>
+
+<script src="./js/qr/qr_packed.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+        alert('このブラウザーは非対応です');
+        exit();
+    }
+
+    var ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var devices;
+    var activeIndex;
+    var iosRear = false;
+
+    // カメラ情報取得
+    navigator.mediaDevices.enumerateDevices()
+        .then(function(cameras) {
+            var cams = new Array();
+            cameras.forEach(function(device) {
+                if (device.kind === 'videoinput') {
+                    cams.push({
+                        'id': device.deviceId,
+                        'name': device.label
+                    });
                 }
+            });
+
+            devices = cams;
+            var c = new Array();
+            for (var i = 0; i < cams.length; i++) {
+                c.push('カメラ名: ' + cams[i].name);
+                c.push('カメラID: ' + cams[i].id);
+            }
+
+            changeCamera(devices.length - 1);
+        })
+        .catch(function (err) {
+            alert('カメラが見つかりません');
+        });
+
+    var video = document.getElementById('video');
+    var localStream = null;
+
+    function decodeImageFromBase64(data, callback) {
+        qrcode.callback = callback;
+        qrcode.decode(data);
+    }
+
+    document.getElementById('changeCamera').addEventListener('click', function () {
+        let newIndex = activeIndex + 1;
+        if (newIndex >= devices.length) {
+            newIndex = 0;
+        }
+        changeCamera(newIndex);
+    }, false);
+
+    function decode() {
+        if (localStream) {
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            var img = document.getElementById('img');
+            var h;
+            var w;
+
+            w = video.offsetWidth;
+            h = video.offsetHeight;
+
+            canvas.setAttribute('width', w);
+            canvas.setAttribute('height', h);
+            ctx.drawImage(video, 0, 0, w, h);
+
+            decodeImageFromBase64(canvas.toDataURL('image/png'), function (decodeInformation) {
+                var input = document.getElementById('qr');
+                if (!(decodeInformation instanceof Error)) {
+                    input.value = decodeInformation;
+                }
+            });
+        }
+    }
+
+    function startReadQR() {
+        setInterval('decode()', 500);
+    }
+
+    function changeCamera(index) {
+        if (localStream) {
+            localStream.getVideoTracks()[0].stop();
+        }
+
+        activeIndex = index;
+        iosRear = !iosRear;
+        var p = document.getElementById('active-camera');
+        p.innerHTML = devices[activeIndex].name + '(' + devices[activeIndex].id + ')';
+        setCamera();
+    }
+
+    function setCamera() {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || windiow.navigator.mozGetUserMedia;
+        window.URL = window.URL || window.webkitURL;
+
+        var videoOptions;
+
+        if (ios) {
+            videoOptions = {
+                facingMode: {
+                    exact: (iosRear) ? 'environment' : 'user'
+                },
+                mandatory: {
+                    sourceId: devices[activeIndex].id,
+                    minWidth: 600,
+                    maxWidth: 800,
+                    minAspectRatio: 1.6
+                },
+                optional: []
             };
-            qrcode.decode(reader.result);
-        };
-        reader.readAsDataURL(node.files[0]);
+        } else {
+            videoOptions = {
+                mandatory: {
+                    sourceId: devices[activeIndex].id,
+                    minWidth: 600,
+                    maxWidth: 800,
+                    minAspectRatio: 1.6
+                },
+                optional: []
+            };
+        }
+
+        navigator.getUserMedia(
+            {
+                audio: false,
+                video: videoOptions
+            },
+            function (stream) {
+                if (ios) {
+                    video.srcObject = stream;
+                } else {
+                    video.src = window.URL.createObjectURL(stream);
+                }
+                localStream = stream;
+            },
+            function (err) {
+
+            }
+        );
+
+        startReadQR();
     }
 </script>
 
-</body>
 </html>
