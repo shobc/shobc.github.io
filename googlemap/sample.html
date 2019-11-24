@@ -1,0 +1,222 @@
+<html>
+<head>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script src ="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCvQAkO8JM-K7SoyZ2pp6viuqTa0XvLjJE" async defer></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta charset="windows-31j">
+    <script async defer>
+        //htmlのselectを変更した場合
+        $(function(){
+            $('#bus').change(function() {
+                var r = $('option:selected').val().split(',');
+                end_lat = r[0];
+                end_lng = r[1];
+                initMap();
+            })
+        });
+        var time; //距離の時間
+        var start_lat;//スタートの経度
+        var start_lng;//スタートの緯度
+        var end_lat;//ゴールの経度
+        var end_lng;//ゴールの緯度
+
+        // var g_lat;//現在地の経度
+        // var g_lng;//現在地の緯度
+
+        var imgt = "1.png";
+        var imgh = "2.png";
+        $(function(){
+            $('input[name=bust]').click(function () {
+                var r = $("input[name='bust']:checked").val();
+                imgt = r+".png";
+                initMap();
+            })
+        });
+        $(function(){
+            $('input[name=bush]').click(function () {
+                var r = $("input[name='bush']:checked").val();
+                imgh = r+".png";
+                initMap();
+            })
+        });
+        //最初に呼ばれる
+        function load() {
+            //jsonファイルから取得
+            $.getJSON("sample.json", function (data) {
+                start_lat = data.routes[0].legs[0].start_location.lat;
+                start_lng = data.routes[0].legs[0].start_location.lng;
+                end_lat = data.routes[0].legs[0].end_location.lat;
+                end_lng = data.routes[0].legs[0].end_location.lng;
+                initMap();
+            });
+        }
+        //google mapを表示するための関数
+        function initMap(){
+            //現在地を取得する
+
+            //  navigator.geolocation.getCurrentPosition(
+            //   function(position) {
+            //     // 緯度・経度を変数に格納
+            //       g_lat = position.coords.latitude;
+            //       g_lng = position.coords.longitude;
+            //   },
+            // );
+
+            //スタート地点の経度と緯度を設定
+            var lat_lng_start = new google.maps.LatLng(start_lat, start_lng);
+            //ゴール地点の経度と緯度を設定
+            var lat_lng_goal = new google.maps.LatLng(end_lat, end_lng);
+            //現在地の経度と緯度を設定
+
+            // var g_lat_lng = new google.maps.LatLng(g_lat, g_lng);
+
+            //ルートを作るためのAPIをインスタンス化
+            var directionsService = new google.maps.DirectionsService();
+            //ルートを作るためのAPIをインスタンス化
+            var directionsRenderer = new google.maps.DirectionsRenderer();
+            //mapを表示するときの設定
+            var opts = {
+                zoom: 20,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            //実際のmapを取得
+            map = new google.maps.Map(document.getElementById("target"), opts);
+            //ピンを非表示にする
+            directionsRenderer.setOptions({
+                suppressMarkers: true
+            });
+            // ルートを取得
+            var request = {
+                origin: lat_lng_start,        // スタート地点の緯度、経度
+                destination: lat_lng_goal,   // ゴール地点の緯度、経度
+                travelMode: google.maps.DirectionsTravelMode.DRIVING, // ルートの種類　最後のDRIVINGが車
+            };
+            directionsService.route(request, function(result, status) {
+                time = result["routes"][0]["legs"][0]["duration"]["text"];//resultがJSONファイル形式になっている
+                //スタート地点のピンの設定
+                marker_start = new google.maps.Marker({
+                    position: lat_lng_start,
+                    //ピンの動きを設定
+                    draggable: false,
+                    //画像の設定
+                    icon:imgh,
+                    //ピンの動き
+                    animation:google.maps.Animation.BOUNCE
+                });
+                //ゴール地点のピンの設定
+                marker_goal = new google.maps.Marker({
+                    position: lat_lng_goal,
+                    //ピンの動きを設定
+                    draggable: false,
+                    //画像の設定
+                    icon:imgt,
+                    //ピンの動き
+                    animation:google.maps.Animation.BOUNCE
+                });
+                //現在地のピンの設定
+
+                // marker_g = new google.maps.Marker({
+                //     position: g_lat_lng,
+                //     //ピンの動きを設定
+                //     draggable: false,
+                //     //画像の設定
+                //     icon:'3.png',
+                //     //ピンの動き
+                //     animation:google.maps.Animation.DROP
+                // });
+
+                //mapにピンをセットする
+                marker_start.setMap(map);
+                //mapにピンをセットする
+                marker_goal.setMap(map);
+                //mapにピンをセットする
+
+                // marker_g.setMap(map);
+
+                //ピンを押したら表示される内容
+                var infoWindow = new google.maps.InfoWindow({
+                    content: 'あと' + time,
+                });
+                //ピンを押された時のクリックイベント
+                marker_goal.addListener('click',function () {
+                    //
+                    infoWindow.open(map,marker_goal)
+                });
+                // 取得したルートをセット
+                directionsRenderer.setDirections(result);
+                // ルートを地図に表示
+                directionsRenderer.setMap(map);
+            });
+        }
+    </script>
+    <title>山手通りのバス停案内</title>
+    <style>
+        #bust{
+            float: left;
+            margin-left: 30px;
+        }
+        input[type=radio] {
+            display: none;
+            font-size: 16px;
+            transform: scale(0.8);
+        }
+        *{
+            margin:0;
+            padding: 0;
+            text-align: center;
+        }
+        #target{
+            margin-left: 35%;
+            width:550px;
+            height: 400px;
+        }
+        .container{
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+        #busss{
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        @media screen and (min-width: 375px) {
+            #target{
+                margin-left: 0;
+                margin-top:10px;
+                width:375px;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body onload="load()">
+<h2>山手通りのバス停案内</h2>
+<select id="bus">
+    <option value="35.6970686, 139.68216129999996">中野坂上駅前バス停</option>
+    <option value="35.7145167, 139.68656580000004" selected>中井駅前バス停</option>
+    <option value="35.7066742, 139.68269439999995">東中野駅前バス停</option>
+    <option value="35.7234039, 139.68347849999998">落合南長崎駅前バス停</option>
+    <option value="35.7325921, 139.67043869999998">新江古田駅前バス停</option>
+    <option value="35.737841, 139.653912100000078">練馬駅前バス停</option>
+</select>
+<div class="container">
+    <div id ="target"></div>
+</div>
+<div id="busss">
+    <div id="bust">
+        <p>バス停選択</p>
+        <label><input type="radio" style="margin:30px;" name="bust" value="1" checked><img src="1.png"></label>
+        <label><input type="radio" style="margin:30px;" name="bust" value="1-1"><img src="1-1.png"></label>
+        <label><input type="radio" style="margin:30px;" name="bust" value="1-2"><img src="1-2.png"></label>
+    </div>
+    <div id="bush">
+        <p>バス選択</p>
+        <label><input type="radio" style="margin:30px;" name="bush" value="2" checked><img src="2.png"></label>
+        <label><input type="radio" style="margin:30px;" name="bush" value="2-1"><img src="2-1.png"></label>
+        <label><input type="radio" style="margin:30px;" name="bush" value="2-2"><img src="2-2.png"></label>
+    </div>
+</div>
+</body>
+</html>

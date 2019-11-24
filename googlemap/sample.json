@@ -1,0 +1,116 @@
+{
+    "geocoded_waypoints": [
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJC-n5m8nyGGARZLWv_2Ljv5g",
+            "types": [
+                "clothing_store",
+                "establishment",
+                "point_of_interest",
+                "store"
+            ]
+        },
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJ6fss8LPyGGARHiMi-S5Ogqc",
+            "types": [
+                "premise"
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 35.714527,
+                    "lng": 139.6865345
+                },
+                "southwest": {
+                    "lat": 35.7064214,
+                    "lng": 139.6828595
+                }
+            },
+            "copyrights": "地図データ ©2019",
+            "legs": [
+                {
+                    "distance": {
+                        "text": "1.2 km",
+                        "value": 1152
+                    },
+                    "duration": {
+                        "text": "4分",
+                        "value": 237
+                    },
+                    "end_address": "日本、〒161-0034 東京都新宿区上落合２丁目２０−４ 小西酒店",
+                    "end_location": {
+                        "lat": 35.714527,
+                        "lng": 139.6865345
+                    },
+                    "start_address": "日本、〒164-0003 東京都中野区東中野４丁目３−１",
+                    "start_location": {
+                        "lat": 35.706478,
+                        "lng": 139.6851911
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 206
+                            },
+                            "duration": {
+                                "text": "1分",
+                                "value": 77
+                            },
+                            "end_location": {
+                                "lat": 35.7066506,
+                                "lng": 139.6829913
+                            },
+                            "html_instructions": "<b>西</b>に進んで<b>山手通り</b>/<wbr/><b>都道317号</b>に向かう",
+                            "polyline": {
+                                "points": "o||xEmgqsYF@@~A@`@?t@?~@?H?@AJAFAJAJAHAD?BETKf@I\\ET"
+                            },
+                            "start_location": {
+                                "lat": 35.706478,
+                                "lng": 139.6851911
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.9 km",
+                                "value": 946
+                            },
+                            "duration": {
+                                "text": "3分",
+                                "value": 160
+                            },
+                            "end_location": {
+                                "lat": 35.714527,
+                                "lng": 139.6865345
+                            },
+                            "html_instructions": "<b>東中野駅前（交差点）</b> を<b>右折</b>して <b>山手通り</b>/<wbr/><b>都道317号</b> に入る<div style=\"font-size:0.9em\">目的地は前方右側です</div>",
+                            "maneuver": "turn-right",
+                            "polyline": {
+                                "points": "q}|xEuypsYGXOGc@OOGQGaA_@qAe@A?OGgBm@[Mg@Qw@Yq@U[Ki@So@Ug@Qe@Os@U[MUIEAWKC?KE{@[WK_@MeC_AcA_@_@OQGYKWI?AOEOIUIQIOIQGSKQGIEWKOEECA?AAEACCC?AA]MWKA?"
+                            },
+                            "start_location": {
+                                "lat": 35.7066506,
+                                "lng": 139.6829913
+                            },
+                            "travel_mode": "DRIVING"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "o||xEmgqsYF@@~A@vAAvA[pBOr@GXOGs@WsAg@kE{AmDoAiHeCgHiCgE_BqCkAaBm@"
+            },
+            "summary": "山手通り/都道317号",
+            "warnings": [],
+            "waypoint_order": []
+        }
+    ],
+    "status": "OK"
+}
