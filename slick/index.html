@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ 　　  <meta charset="utf-8">
+       <script src="jquery-3.4.1.min.js"></script>
+ 　　  <script src="slick.js" type="text/javascript"></script>
+ 　　  <link rel="stylesheet" href="slick-theme.css" type="text/css">
+ 　　  <link rel="stylesheet" href="slick.css" type="text/css"> 
+      <title>jQuery</title>
+  <script type="text/javascript">
+      $(function(){
+        $('.slider').each(function(){
+          $(this).slick({
+            autoplay:true,
+            autoplaySpeed:5000,
+            dots:true,
+            centerMode: true, //要素を中央寄せ
+          centerPadding:'50px', //両サイドの見えている部分のサイズ
+          });
+        });
+      });
+  </script>
+  <style>
+    .slick-prev, .slick-next,.slick-arrow{
+      height: 100%;
+      z-index: 999;
+    }
+    .slick-prev{
+        z-index: 999;
+        height:20px; 
+        left: 25px;
+      }
+    .slick-next{
+        right: 25px;
+    }
+    .slick-initialized .slick-slide{
+      opacity: 0.6; /* 両サイドの画像を透過 */
+    }
+    .slick-initialized .slick-slide.slick-active{
+      opacity: 1; /* センター画像を非透過 */
+    }
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .slider img{
+      height: auto;
+      width: 100%;
+    }
+    .slick-prev:before,
+    .slick-next:before{
+        color: #000;
+        z-index: 999;
+    }
+  </style>
+  </head>
+  <body>
+    <ul class="slider">
+        <li><img src="https://on-ze.com/demo/images/sample-02.png" alt="image01"></li>
+        <li><img src="https://on-ze.com/demo/images/sample-03.png" alt="image02"></li>
+        <li><img src="https://on-ze.com/demo/images/sample-01.png" alt="image03"></li>
+    </ul>
+  </body>
+</html>
