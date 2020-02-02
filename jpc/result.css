@@ -1,0 +1,59 @@
+*{
+	padding: 0;
+	margin:0;
+}
+.title{
+	margin:0 40% 0 40%;
+	font-size:45px;
+}
+.aisyou,.today{
+	margin-left: 30px;
+}
+.container {
+	display: flex;
+	justify-content: center;
+}
+.sign{
+	color:#a187d1;
+}
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table tr{
+  border-bottom: solid 1px #eee;
+  cursor: pointer;
+}
+
+table tr:hover{
+	background-color: rgba(189, 191, 209, 0.36);
+}
+
+table th,table td{
+  text-align: center;
+  width: 25%;
+  padding: 15px 0;
+}
+
+table td.icon{
+  background-size: 35px;
+  background-position: left 5px center;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+#backTop{
+	margin:0 40% 0 40%;
+	color: black;
+	font-size: 40px;
+}
+#backTop:hover{
+	color: #a187d1;
+}
+.circle{
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+}

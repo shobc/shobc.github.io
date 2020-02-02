@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>プロフィール画面</title>
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="result.js"></script>
+	<link rel="stylesheet" type="text/css" href="result.css">
+</head>
+<body>
+	<div>
+		<span class="title">12星座占い</span>
+		<div class="container">
+			<div id="image"></div>
+			<div>
+				<span class="sign">星座：山羊座</span><span class="today">${result.today}</span><br>
+				<span>順位：${result.rank}</span><span class="aisyou">相性星座:${result.aisyou}</span><br>
+				<span>コメント：${result.comment}</span><br>
+				<span>ラッキーカラー:${result.color}</span>
+			</div>
+		</div>
+	</div>
+	<span class="title">ランキング</span>
+	<table>
+	  <tr>
+		<th>星座</th><th>順位</th><th>ラッキーカラー</th><th>相性星座</th>
+	  </tr>
+	<c:forEach var="allList" items="${all}" >
+		<tr >
+			<td id="sign1" class="icon bird">山羊座</td><td>${allList.rank}</td><td id="color1"><span class="circle"></span>青</td><td>${allList.aisyou}</td>
+		</tr>
+		<tr >
+			<td id="sign2" class="icon bird">水瓶座</td><td>${allList.rank}</td><td id="color2"><span class="circle"></span>赤</td><td>${allList.aisyou}</td>
+		</tr>
+	</c:forEach>
+	</table>
+	<a href="index.jsp" id="backTop">ホームに戻る</a>
+</body>
+</html>

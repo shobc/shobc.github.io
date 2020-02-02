@@ -1,0 +1,142 @@
+body{
+    margin:0;
+    padding:0;
+    text-align: center;
+}
+.cp_ipselect {
+    position: relative;
+    width: 20%;
+    margin: 2em auto;
+    text-align: center;
+}
+.cp_sl06 {
+    position: relative;
+    font-family: inherit;
+    background-color: transparent;
+    width: 100%;
+    padding: 10px 10px 10px 0;
+    font-size: 18px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0, 0.3);
+}
+.cp_sl06:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(0,0,0, 0);
+}
+.cp_ipselect .cp_sl06 {
+    appearance: none;
+    -webkit-appearance:none
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect:after {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: '';
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+.cp_sl06_selectlabel {
+    color: rgba(0,0,0, 0.5);
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    top: 10px;
+    transition: 0.2s ease all;
+}
+.cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
+    color: #a187d1;
+    top: -20px;
+    transition: 0.2s ease all;
+    font-size: 14px;
+}
+.cp_sl06_selectbar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.cp_sl06_selectbar:before, .cp_sl06_selectbar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #a187d1;
+    transition: 0.2s ease all;
+}
+.cp_sl06_selectbar:before {
+    left: 50%;
+}
+.cp_sl06_selectbar:after {
+    right: 50%;
+}
+.cp_sl06:focus ~ .cp_sl06_selectbar:before, .cp_sl06:focus ~ .cp_sl06_selectbar:after {
+    width: 50%;
+}
+.cp_sl06_highlight {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+.title{
+    font-size:50px;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+.cp_iptxt {
+    margin: 0 35%;
+}
+.cp_iptxt input[type=text] {
+    font: 15px/24px sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 8px 0;
+    padding: 0.3em;
+    transition: 0.3s;
+    border: 1px solid #1b2538;
+    border-radius: 4px;
+    outline: none;
+}
+.cp_iptxt input[type=text]:focus {
+    border-color: #a187d1;
+}
+.cp_iptxt input[type=text] {
+    padding-left: 40px;
+}
+.btn-flat-border {
+    width: 150px;
+    height: 60px;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    background: white;
+    border: solid 2px rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+    transition: .4s;
+    margin: 150px 0 0 0;
+}
+
+.btn-flat-border:hover {
+    background: white;
+    color: #a187d1;
+    border: solid 2px #a187d1;
+
+}
+.errorMessage{
+    color:red;
+}

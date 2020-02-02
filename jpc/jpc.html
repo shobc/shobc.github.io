@@ -1,0 +1,58 @@
+<!--<%@page pageEncoding="UTF-8"-->
+<!--        isErrorPage="true"-->
+<!--        contentType="text/html; charset=UTF-8"%>-->
+<html>
+<head>
+	<title>sample</title>
+    <meta charset="utf-8">
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="jpc.js"></script>
+    <link rel="stylesheet" type="text/css" href="jpc.css">
+</head>
+<body>
+    <span class="title">星座占い</span>
+	<form action="" method="get">
+        <div class="cp_iptxt">
+            <span class="errorMessage">${pageContext.exception.message}</span>
+            <input type="text" placeholder="名前" required>
+        </div>
+        <span>生年月日を入力する</span>
+		<div class="container">
+            <div class="cp_ipselect">
+            <select name="jpc" id="jpc" class="cp_sl06" required>
+                　<option value="" hidden disabled selected></option>
+                 <option value="令和">令和</option>
+                 <option value="平成">平成</option>
+                <option value="昭和">昭和</option>
+                <option value="大正">大正</option>
+            </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+            <label class="cp_sl06_selectlabel">和暦</label>
+        </div>
+        <div class="cp_ipselect">
+            <select name="year" id="year"  class="cp_sl06" required disabled>
+            </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+            <label class="cp_sl06_selectlabel">年</label>
+        </div>
+        <div class="cp_ipselect">
+            <select name="month" id="month" class="cp_sl06" required disabled>
+            </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+            <label class="cp_sl06_selectlabel">月</label>
+        </div>
+        <div class="cp_ipselect">
+            <select name="day" id="day" class="cp_sl06" required disabled>
+		    </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+            <label class="cp_sl06_selectlabel">日</label>
+        </div>
+        </div>
+        <input type="submit" class="btn-flat-border" value="占う">
+	</form>
+</body>
+</html>
